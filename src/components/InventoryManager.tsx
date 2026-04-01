@@ -13,7 +13,7 @@ type Item = {
   sku: string | null;
 };
 
-export default function InventoryManager({ products }: { products: Item[] }) {
+export default function InventoryManager({ products, categories, locations }: { products: Item[], categories: string[], locations: string[] }) {
   const router = useRouter();
   const searchParams = useSearchParams();
   const initialSearch = searchParams.get('q') || '';
@@ -45,7 +45,7 @@ export default function InventoryManager({ products }: { products: Item[] }) {
       
       <div className="dashboard-grid">
         <div className="dashboard-sidebar">
-          <ItemForm />
+          <ItemForm categories={categories} locations={locations} />
         </div>
         
         <div className="dashboard-main">

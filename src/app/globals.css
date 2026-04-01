@@ -134,6 +134,144 @@ body {
   background-color: #fff;
 }
 
+/* Combo Dropdown */
+.combo-wrapper {
+  position: relative;
+}
+
+.combo-trigger {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-family: var(--font-inter);
+  background-color: #f8fafc;
+  cursor: pointer;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  text-align: left;
+  transition: all 0.2s ease;
+}
+
+.combo-trigger:hover,
+.combo-trigger:focus {
+  outline: none;
+  border-color: var(--periwinkle-mid);
+  box-shadow: 0 0 0 3px rgba(204, 204, 255, 0.45);
+  background-color: #fff;
+}
+
+.combo-placeholder {
+  color: #94a3b8;
+}
+
+.combo-value {
+  color: var(--text-main);
+  font-weight: 500;
+}
+
+.combo-arrow {
+  font-size: 0.65rem;
+  color: var(--text-muted);
+}
+
+.combo-dropdown {
+  position: absolute;
+  top: calc(100% + 4px);
+  left: 0;
+  right: 0;
+  background: var(--surface-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-lg);
+  z-index: 50;
+  overflow: hidden;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.combo-option {
+  padding: 0.65rem 1rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background 0.15s;
+  color: var(--text-main);
+}
+
+.combo-option:hover {
+  background-color: var(--periwinkle-light);
+}
+
+.combo-option.selected {
+  background-color: var(--periwinkle-light);
+  font-weight: 600;
+  color: var(--hunter-green);
+}
+
+.combo-add-option {
+  color: var(--hunter-green);
+  font-weight: 600;
+  border-top: 1px solid var(--border-color);
+}
+
+.combo-empty {
+  padding: 0.65rem 1rem;
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  font-style: italic;
+}
+
+.combo-add-row {
+  display: flex;
+  gap: 6px;
+  align-items: center;
+}
+
+.combo-add-row input {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--periwinkle-mid);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-family: var(--font-inter);
+  background-color: #fff;
+  box-shadow: 0 0 0 3px rgba(204, 204, 255, 0.45);
+  outline: none;
+}
+
+.combo-confirm-btn,
+.combo-cancel-btn {
+  padding: 0.5rem 0.65rem;
+  border-radius: 0.4rem;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 700;
+  transition: all 0.15s;
+}
+
+.combo-confirm-btn {
+  background: var(--hunter-green);
+  color: white;
+}
+
+.combo-confirm-btn:hover {
+  background: var(--hunter-green-hover);
+}
+
+.combo-cancel-btn {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border-color);
+}
+
+.combo-cancel-btn:hover {
+  background: var(--periwinkle-light);
+}
+
+/* Btn Primary */
 .btn-primary {
   width: 100%;
   padding: 0.875rem;

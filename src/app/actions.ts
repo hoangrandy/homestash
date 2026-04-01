@@ -20,6 +20,26 @@ export async function getItems(searchQuery?: string) {
   });
 }
 
+export async function getDistinctCategories(): Promise<string[]> {
+  const results = await prisma.product.findMany({
+    where: { category: { not: null } },
+    select: { category: true },
+    distinct: ['category'],
+    orderBy: { category: 'asc' },
+  });
+  return results.map((r: { category: string | null }) => r.category as string);
+}
+
+export async function getDistinctLocations(): Promise<string[]> {
+  const results = await prisma.product.findMany({
+    where: { sku: { not: null } },
+    select: { sku: true },
+    distinct: ['sku'],
+    orderBy: { sku: 'asc' },
+  });
+  return results.map((r: { sku: string | null }) => r.sku as string);
+}
+
 export async function addItem(formData: FormData) {
   const name = formData.get('name') as string;
   const category = formData.get('category') as string | null;

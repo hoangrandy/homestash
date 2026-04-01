@@ -1,4 +1,4 @@
-import { getItems } from './actions';
+import { getItems, getDistinctCategories, getDistinctLocations } from './actions';
 import InventoryManager from '@/components/InventoryManager';
 import AppContainer from '@/components/AppContainer';
 
@@ -16,12 +16,16 @@ export default async function Page({
   const rawQ = resolvedSearchParams.q;
   const q = typeof rawQ === 'string' ? rawQ : undefined;
   
-  const products = await getItems(q);
+  const [products, categories, locations] = await Promise.all([
+    getItems(q),
+    getDistinctCategories(),
+    getDistinctLocations(),
+  ]);
 
   return (
     <main>
       <AppContainer>
-        <InventoryManager products={products} />
+        <InventoryManager products={products} categories={categories} locations={locations} />
       </AppContainer>
     </main>
   );
