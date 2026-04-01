@@ -81,32 +81,39 @@ export default function ItemTableRow({ product, allLocations }: { product: Item,
         onClick={() => {
           if (!isEditing) setIsLocationDropdownOpen(true);
         }}
-        style={{ cursor: isEditing ? 'default' : 'pointer' }}
-        title="Click to select another location"
+        style={{ cursor: isEditing ? 'default' : 'pointer', position: 'relative' }}
+        title={isEditing ? '' : 'Click to change location'}
       >
         {isEditing ? (
           <input className="edit-input" value={editSku} onChange={e => setEditSku(e.target.value)} placeholder="Location..." />
         ) : isLocationDropdownOpen ? (
-          <select 
-            autoFocus
-            className="edit-input"
-            onBlur={() => setIsLocationDropdownOpen(false)}
-            onChange={(e) => {
-               const newLocation = e.target.value;
-               setIsLocationDropdownOpen(false);
-               if (newLocation !== product.sku) {
-                 startTransition(async () => {
-                   await updateItem(product.id, { sku: newLocation || null });
-                 });
-               }
+          <div
+            className="inline-location-dropdown"
+            onBlur={(e) => {
+              if (!e.currentTarget.contains(e.relatedTarget as Node)) {
+                setIsLocationDropdownOpen(false);
+              }
             }}
-            defaultValue={product.sku || ""}
+            tabIndex={-1}
           >
-            <option value="" disabled>Select location...</option>
+            <div className="inline-location-current">{product.sku || 'No location'}</div>
             {allLocations.map(loc => (
-              <option key={loc} value={loc}>{loc}</option>
+              <div
+                key={loc}
+                className={`inline-location-option ${loc === product.sku ? 'active' : ''}`}
+                onMouseDown={() => {
+                  setIsLocationDropdownOpen(false);
+                  if (loc !== product.sku) {
+                    startTransition(async () => {
+                      await updateItem(product.id, { sku: loc || null });
+                    });
+                  }
+                }}
+              >
+                {loc}
+              </div>
             ))}
-          </select>
+          </div>
         ) : (
           product.sku || '-'
         )}

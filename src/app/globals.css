@@ -377,6 +377,50 @@ body {
   pointer-events: none;
 }
 
+/* Inline location dropdown in table */
+.inline-location-dropdown {
+  position: absolute;
+  top: 0;
+  left: 0;
+  min-width: 160px;
+  background: var(--surface-bg);
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  box-shadow: var(--shadow-lg);
+  z-index: 100;
+  overflow: hidden;
+  outline: none;
+}
+
+.inline-location-current {
+  padding: 0.5rem 1rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  background: var(--periwinkle-light);
+  border-bottom: 1px solid var(--border-color);
+}
+
+.inline-location-option {
+  padding: 0.6rem 1rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  color: var(--text-main);
+  transition: background 0.1s;
+}
+
+.inline-location-option:hover {
+  background: var(--periwinkle-light);
+}
+
+.inline-location-option.active {
+  color: var(--hunter-green);
+  font-weight: 600;
+  background: var(--hunter-green-light);
+}
+
 .table-cell {
   padding: 1.25rem 1.5rem;
   vertical-align: middle;
