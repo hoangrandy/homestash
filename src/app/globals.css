@@ -1,0 +1,343 @@
+:root {
+  --font-inter: 'Inter', system-ui, sans-serif;
+  
+  /* Primary palette */
+  --periwinkle: #CCCCFF;
+  --periwinkle-light: #e8e8ff;
+  --periwinkle-mid: #b0b0f0;
+  --hunter-green: #355E3B;
+  --hunter-green-hover: #2a4b2f;
+  --hunter-green-light: #edf4ee;
+
+  --bg-color: #f4f4fc;
+  --text-main: #1a1a2e;
+  --text-muted: #5a6270;
+
+  --primary-color: #355E3B;
+  --primary-hover: #2a4b2f;
+  --danger-color: #c0392b;
+  --success-color: #355E3B;
+
+  --surface-bg: #ffffff;
+  --border-color: #dcdcf5;
+
+  --shadow-sm: 0 1px 2px 0 rgb(53 94 59 / 0.06);
+  --shadow-md: 0 4px 6px -1px rgb(53 94 59 / 0.1), 0 2px 4px -2px rgb(53 94 59 / 0.06);
+  --shadow-lg: 0 10px 15px -3px rgb(53 94 59 / 0.12), 0 4px 6px -4px rgb(53 94 59 / 0.07);
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: var(--font-inter);
+  background-color: var(--bg-color);
+  color: var(--text-main);
+  line-height: 1.5;
+}
+
+/* Layout */
+.inventory-dashboard {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 3rem 1.5rem;
+}
+
+.dashboard-header {
+  margin-bottom: 3rem;
+  text-align: center;
+}
+
+.dashboard-header h1 {
+  font-size: 2.5rem;
+  font-weight: 800;
+  letter-spacing: -0.025em;
+  background: linear-gradient(135deg, #355E3B 0%, #5a9464 60%, #CCCCFF 100%);
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  margin-bottom: 0.5rem;
+}
+
+.dashboard-header p {
+  color: var(--text-muted);
+  font-size: 1.125rem;
+}
+
+.dashboard-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: 2rem;
+  align-items: start;
+}
+
+@media (min-width: 1024px) {
+  .dashboard-grid {
+    grid-template-columns: 350px 1fr;
+  }
+}
+
+/* Form Styles */
+.product-form-card {
+  background-color: var(--surface-bg);
+  border-radius: 1rem;
+  padding: 2rem;
+  box-shadow: var(--shadow-md);
+  position: sticky;
+  top: 2rem;
+}
+
+.product-form-card h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  margin-bottom: 1.5rem;
+  color: var(--hunter-green);
+}
+
+.form-group {
+  margin-bottom: 1.25rem;
+}
+
+.form-group label {
+  display: block;
+  font-size: 0.875rem;
+  font-weight: 500;
+  color: #475569;
+  margin-bottom: 0.5rem;
+}
+
+.form-group .required {
+  color: var(--danger-color);
+}
+
+.form-group input {
+  width: 100%;
+  padding: 0.75rem 1rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  transition: all 0.2s ease;
+  background-color: #f8fafc;
+}
+
+.form-group input:focus {
+  outline: none;
+  border-color: var(--periwinkle-mid);
+  box-shadow: 0 0 0 3px rgba(204, 204, 255, 0.45);
+  background-color: #fff;
+}
+
+.btn-primary {
+  width: 100%;
+  padding: 0.875rem;
+  background-color: var(--primary-color);
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.btn-primary:hover {
+  background-color: var(--primary-hover);
+}
+
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+.error-message {
+  color: var(--danger-color);
+  font-size: 0.875rem;
+  margin-top: 1rem;
+  background-color: #fdf1f0;
+  padding: 0.75rem;
+  border-radius: 0.5rem;
+  border: 1px solid #f5c6c2;
+}
+
+/* Main Dashboard Area */
+.search-bar-container {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+}
+
+.search-input {
+  flex: 1;
+  padding: 1rem 1.25rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.75rem;
+  font-size: 1rem;
+  box-shadow: var(--shadow-sm);
+  transition: all 0.2s ease;
+}
+
+.search-input:focus {
+  outline: none;
+  border-color: var(--periwinkle-mid);
+  box-shadow: 0 0 0 3px rgba(204, 204, 255, 0.45), var(--shadow-md);
+}
+
+.loading-indicator {
+  font-size: 0.875rem;
+  color: var(--text-muted);
+  animation: pulse 1.5s infinite;
+}
+
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+/* Table Styles */
+.table-container {
+  background-color: var(--surface-bg);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-md);
+  overflow-x: auto;
+}
+
+.product-table {
+  width: 100%;
+  border-collapse: collapse;
+  text-align: left;
+}
+
+.table-header {
+  padding: 1rem 1.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+  color: var(--hunter-green);
+  border-bottom: 2px solid var(--periwinkle);
+  background-color: var(--periwinkle-light);
+}
+
+.table-row {
+  border-bottom: 1px solid var(--border-color);
+  transition: background-color 0.2s ease;
+}
+
+.table-row:hover {
+  background-color: var(--periwinkle-light);
+}
+
+.table-row.pending {
+  opacity: 0.5;
+  pointer-events: none;
+}
+
+.table-cell {
+  padding: 1.25rem 1.5rem;
+  vertical-align: middle;
+}
+
+.main-cell {
+  font-weight: 500;
+  color: var(--text-main);
+}
+
+.secondary-cell {
+  color: var(--text-muted);
+  font-variant-numeric: tabular-nums;
+}
+
+.align-right {
+  text-align: right;
+}
+
+/* Buttons and Actions in Table */
+.view-actions {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.view-actions span {
+  font-weight: 600;
+  color: var(--hunter-green);
+  min-width: 2rem;
+}
+
+.edit-actions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.edit-input {
+  width: 4rem;
+  padding: 0.25rem 0.5rem;
+  border: 1px solid var(--border-color);
+  border-radius: 0.25rem;
+  text-align: center;
+}
+
+.btn-small {
+  padding: 0.25rem 0.75rem;
+  font-size: 0.75rem;
+  border-radius: 0.25rem;
+  cursor: pointer;
+  border: 1px solid transparent;
+  transition: all 0.2s;
+}
+
+.btn-small.success {
+  background-color: var(--hunter-green);
+  color: white;
+}
+
+.btn-small.success:hover {
+  background-color: var(--hunter-green-hover);
+}
+
+.btn-small.neutral {
+  background-color: transparent;
+  color: var(--text-muted);
+  border-color: var(--periwinkle-mid);
+}
+
+.btn-small.neutral:hover {
+  background-color: var(--periwinkle-light);
+}
+
+.btn-link {
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: opacity 0.2s;
+}
+
+.btn-link:hover {
+  opacity: 0.8;
+}
+
+.edit-link {
+  color: var(--hunter-green);
+}
+
+.delete-link {
+  color: var(--danger-color);
+}
+
+/* Empty State */
+.empty-state {
+  text-align: center;
+  padding: 4rem 2rem;
+  background-color: var(--surface-bg);
+  border-radius: 1rem;
+  box-shadow: var(--shadow-md);
+  border: 2px dashed var(--periwinkle);
+  color: var(--text-muted);
+  font-size: 1.125rem;
+}
