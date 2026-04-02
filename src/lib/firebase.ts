@@ -3,13 +3,13 @@ import { getAnalytics, isSupported, Analytics } from "firebase/analytics";
 import { getAuth } from "firebase/auth";
 
 const firebaseConfig = {
-  apiKey: "AIzaSyBqAJt95W1sPoEbA-lgPyVT3NHc9zLlRkk",
-  authDomain: "homestash-161ff.firebaseapp.com",
-  projectId: "homestash-161ff",
-  storageBucket: "homestash-161ff.firebasestorage.app",
-  messagingSenderId: "183785979360",
-  appId: "1:183785979360:web:3b5ae1c0974da107b2bf85",
-  measurementId: "G-D4LQKCLHSS"
+  apiKey: process.env.NEXT_PUBLIC_FIREBASE_API_KEY,
+  authDomain: process.env.NEXT_PUBLIC_FIREBASE_AUTH_DOMAIN,
+  projectId: process.env.NEXT_PUBLIC_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.NEXT_PUBLIC_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.NEXT_PUBLIC_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.NEXT_PUBLIC_FIREBASE_APP_ID,
+  measurementId: process.env.NEXT_PUBLIC_FIREBASE_MEASUREMENT_ID
 };
 
 // Initialize Firebase conditionally to prevent SSR issues in Next.js
