@@ -15,6 +15,7 @@ type Item = {
 export default function ItemTableRow({ product, allLocations }: { product: Item, allLocations: string[] }) {
   const [isEditing, setIsEditing] = useState(false);
   const [isLocationDropdownOpen, setIsLocationDropdownOpen] = useState(false);
+  const [isPhotoModalOpen, setIsPhotoModalOpen] = useState(false);
   const [editSku, setEditSku] = useState(product.sku || '');
   const [editCategory, setEditCategory] = useState(product.category || '');
   const [editName, setEditName] = useState(product.name);
@@ -166,7 +167,18 @@ export default function ItemTableRow({ product, allLocations }: { product: Item,
       </td>
       <td className="table-cell">
         {product.imageUrl ? (
-          <a href={product.imageUrl} target="_blank" rel="noreferrer" className="btn-link" style={{ textDecoration: 'none', color: '#0070f3' }}>Photo</a>
+          <>
+            <span onClick={() => setIsPhotoModalOpen(true)} className="btn-link" style={{ cursor: 'pointer', color: '#0070f3' }}>Photo</span>
+            {isPhotoModalOpen && (
+              <div 
+                onClick={() => setIsPhotoModalOpen(false)} 
+                title="Click anywhere to close"
+                style={{ position: 'fixed', top: 0, left: 0, right: 0, bottom: 0, background: 'rgba(0,0,0,0.8)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 9999, cursor: 'pointer' }}
+              >
+                <img src={product.imageUrl} style={{ maxWidth: '90%', maxHeight: '90%', borderRadius: '8px', boxShadow: '0 4px 12px rgba(0,0,0,0.5)' }} alt={product.name} />
+              </div>
+            )}
+          </>
         ) : (
           <label style={{ cursor: 'pointer', color: '#0070f3' }} className="btn-link">
             {isPending ? '...' : 'Upload'}
