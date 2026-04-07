@@ -6,6 +6,7 @@ type Item = {
   name: string;
   description: string | null;
   sku: string | null;
+  imageUrl: string | null;
 };
 
 export default function ItemTable({ products }: { products: Item[] }) {
@@ -27,6 +28,7 @@ export default function ItemTable({ products }: { products: Item[] }) {
             <th className="table-header">Name</th>
             <th className="table-header">Description</th>
             <th className="table-header">Location</th>
+            <th className="table-header">Photo</th>
             <th className="table-header">Edit</th>
             <th className="table-header align-right">Actions</th>
           </tr>

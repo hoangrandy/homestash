@@ -11,6 +11,7 @@ type Item = {
   name: string;
   description: string | null;
   sku: string | null;
+  imageUrl: string | null;
 };
 
 export default function InventoryManager({ products, categories, locations }: { products: Item[], categories: string[], locations: string[] }) {

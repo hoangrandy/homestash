@@ -1,7 +1,7 @@
 'use client';
 
 import { useState, useTransition } from 'react';
-import { deleteItem, updateItem } from '@/app/actions';
+import { deleteItem, updateItem, uploadImage } from '@/app/actions';
 
 type Item = {
   id: string;
@@ -9,6 +9,7 @@ type Item = {
   name: string;
   description: string | null;
   sku: string | null;
+  imageUrl: string | null;
 };
 
 export default function ItemTableRow({ product, allLocations }: { product: Item, allLocations: string[] }) {
@@ -34,6 +35,21 @@ export default function ItemTableRow({ product, allLocations }: { product: Item,
         alert(e.message);
       }
     });
+  };
+
+  const handlePhotoUpload = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0];
+    if (file) {
+      const formData = new FormData();
+      formData.append('image', file);
+      startTransition(async () => {
+        try {
+          await uploadImage(product.id, formData);
+        } catch (err: any) {
+          alert('Upload failed: ' + err.message);
+        }
+      });
+    }
   };
 
   const handleCancel = () => {
@@ -116,6 +132,16 @@ export default function ItemTableRow({ product, allLocations }: { product: Item,
           </div>
         ) : (
           product.sku || '-'
+        )}
+      </td>
+      <td className="table-cell">
+        {product.imageUrl ? (
+          <a href={product.imageUrl} target="_blank" rel="noreferrer" className="btn-link" style={{ textDecoration: 'none', color: '#0070f3' }}>Photo</a>
+        ) : (
+          <label style={{ cursor: 'pointer', color: '#0070f3' }} className="btn-link">
+            {isPending ? '...' : 'Upload'}
+            <input type="file" accept="image/*" style={{ display: 'none' }} onChange={handlePhotoUpload} disabled={isPending} />
+          </label>
         )}
       </td>
       <td className="table-cell">
