@@ -84,9 +84,6 @@ export async function deleteItem(id: string) {
   revalidatePath('/');
 }
 
-import { writeFile, mkdir } from 'fs/promises';
-import { join } from 'path';
-
 export async function uploadImage(id: string, formData: FormData) {
   const file = formData.get('image') as File | null;
   if (!file) {
@@ -96,20 +93,9 @@ export async function uploadImage(id: string, formData: FormData) {
   const bytes = await file.arrayBuffer();
   const buffer = Buffer.from(bytes);
 
-  // Define upload directory
-  const uploadDir = join(process.cwd(), 'public', 'uploads');
-  // ensure directory exists
-  try {
-    await mkdir(uploadDir, { recursive: true });
-  } catch(e) {}
+  const base64Str = buffer.toString('base64');
+  const imageUrl = `data:${file.type};base64,${base64Str}`;
 
-  const extension = file.name.split('.').pop() || 'tmp';
-  const filename = `${id}-${Date.now()}.${extension}`;
-  const filepath = join(uploadDir, filename);
-
-  await writeFile(filepath, buffer);
-
-  const imageUrl = `/uploads/${filename}`;
   await prisma.product.update({
     where: { id },
     data: { imageUrl }
