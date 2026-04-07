@@ -140,7 +140,7 @@ export default function ItemTableRow({ product, allLocations }: { product: Item,
         ) : (
           <label style={{ cursor: 'pointer', color: '#0070f3' }} className="btn-link">
             {isPending ? '...' : 'Upload'}
-            <input type="file" accept="image/*" style={{ display: 'none' }} onChange={handlePhotoUpload} disabled={isPending} />
+            <input type="file" accept="image/*" capture="environment" style={{ display: 'none' }} onChange={handlePhotoUpload} disabled={isPending} />
           </label>
         )}
       </td>
