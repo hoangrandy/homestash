@@ -21,6 +21,7 @@ export default function InventoryManager({ products, categories, locations }: { 
   
   const [searchTerm, setSearchTerm] = useState(initialSearch);
   const [isPending, startTransition] = useTransition();
+  const [isFormOpen, setIsFormOpen] = useState(false);
 
   // Debouncing search updates the URL
   useEffect(() => {
@@ -46,7 +47,25 @@ export default function InventoryManager({ products, categories, locations }: { 
       
       <div className="dashboard-grid">
         <div className="dashboard-sidebar">
-          <ItemForm categories={categories} locations={locations} />
+          {!isFormOpen ? (
+            <button 
+              onClick={() => setIsFormOpen(true)} 
+              className="btn-primary"
+              style={{ width: '100%', padding: '1rem', fontSize: '1rem', fontWeight: 'bold', marginBottom: '1.5rem', boxShadow: 'var(--shadow-md)' }}
+            >
+              + Add New Item
+            </button>
+          ) : (
+            <div style={{ position: 'relative' }}>
+              <button 
+                onClick={() => setIsFormOpen(false)} 
+                style={{ marginBottom: '1rem', background: 'transparent', color: 'var(--text-muted)', border: 'none', cursor: 'pointer', fontWeight: '600', display: 'flex', alignItems: 'center' }}
+              >
+                ← Close Form
+              </button>
+              <ItemForm categories={categories} locations={locations} />
+            </div>
+          )}
         </div>
         
         <div className="dashboard-main">
