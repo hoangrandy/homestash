@@ -13,6 +13,12 @@ export const metadata: Metadata = {
   description: 'Track and manage your home inventory with ease.',
 };
 
+export const viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  maximumScale: 1,
+};
+
 export default function RootLayout({
   children,
 }: Readonly<{
